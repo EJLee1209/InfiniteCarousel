@@ -13,7 +13,7 @@ import UIKit
 ///
 /// All delegate method calls are guaranteed to happen on the **main thread**.
 @MainActor
-protocol InfiniteCarouselDelegate: AnyObject {
+public protocol InfiniteCarouselDelegate: AnyObject {
     // MARK: - Required
     
     /// Requests the delegate to return the cell corresponding to the specified index.
@@ -48,7 +48,7 @@ extension InfiniteCarouselDelegate {
 }
 
 /// A custom UICollectionView-based view that provides bidirectional infinite scrolling functionality.
-final class InfiniteCarousel: UIView {
+public final class InfiniteCarousel: UIView {
     //*******************************************************
     // MARK: - UI
     //*******************************************************
@@ -59,7 +59,7 @@ final class InfiniteCarousel: UIView {
     // MARK: - Property
     //*******************************************************
     // The delegate to handle carousel events and cell configuration
-    weak var delegate: InfiniteCarouselDelegate?
+    public weak var delegate: InfiniteCarouselDelegate?
     /// The **original data array** exposed to the outside
     private var dataArray: [Any] = .init()
     /// The **extended data array** with elements added to the front and back for infinite scrolling
@@ -155,7 +155,7 @@ final class InfiniteCarousel: UIView {
     /// - Parameters:
     ///   - cellType: The type of `UICollectionViewCell` to register
     ///   - forCellWithReuseIdentifier: The reuse identifier string
-    func register(cellType: UICollectionViewCell.Type, forCellWithReuseIdentifier: String) {
+    public func register(cellType: UICollectionViewCell.Type, forCellWithReuseIdentifier: String) {
         collectionView.register(cellType, forCellWithReuseIdentifier: String(describing: cellType))
     }
     
@@ -165,7 +165,7 @@ final class InfiniteCarousel: UIView {
     ///   - identifier: The reuse identifier of the cell
     ///   - index: The index of the item requesting the cell
     /// - Returns: A reusable `UICollectionViewCell`
-    func dequeueReusableCell(withReuseIdentifier identifier: String, for index: Int) -> UICollectionViewCell {
+    public func dequeueReusableCell(withReuseIdentifier identifier: String, for index: Int) -> UICollectionViewCell {
         let indexPath = IndexPath(item: index, section: 0)
         return collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     }
@@ -175,7 +175,7 @@ final class InfiniteCarousel: UIView {
     /// This function internally expands the data array (`dataArrayForInfinite`) for infinite carousel implementation and refreshes the view (`reloadData()`).
     ///
     /// - Parameter dataArray: The data array to use for the carousel
-    func setDataArray(_ dataArray: [Any]) {
+    public func setDataArray(_ dataArray: [Any]) {
         self.dataArray = dataArray
         
         if dataArray.count <= 1 {
@@ -193,12 +193,12 @@ final class InfiniteCarousel: UIView {
 // MARK: - UICollectionViewDataSource
 extension InfiniteCarousel: UICollectionViewDataSource {
     /// Returns the number of items in the collection view.
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataArrayForInfinite.count
     }
 
     /// Returns the cell for the specified index path.
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let realIndex = toRealIndex(from: indexPath.item) else { return .init() }
         return delegate?.infiniteCarousel(self, cellForItemAt: realIndex) ?? .init()
     }
@@ -207,13 +207,13 @@ extension InfiniteCarousel: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension InfiniteCarousel: UICollectionViewDelegate {
     /// Notifies the delegate when an item is selected.
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let realIndex = toRealIndex(from: indexPath.item) else { return }
         delegate?.infiniteCarousel(self, didSelectItemAt: realIndex)
     }
     
     /// Performs infinite loop handling when scrolling occurs.
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard dataArray.count > 1 else { return }
         
         let pageValue = collectionView.contentOffset.x / collectionView.frame.width
@@ -225,7 +225,7 @@ extension InfiniteCarousel: UICollectionViewDelegate {
     }
     
     /// Notifies the delegate of the current index change when the scroll animation stops.
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let fakeIndex = Int(collectionView.contentOffset.x / collectionView.frame.width)
         guard let realIndex = toRealIndex(from: fakeIndex) else { return }
         delegate?.infiniteCarousel(self, didChangeIndex: realIndex)
@@ -235,7 +235,7 @@ extension InfiniteCarousel: UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension InfiniteCarousel: UICollectionViewDelegateFlowLayout {
     /// Sets the size of each item to the full size of the collection view.
-    func collectionView(
+    public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
@@ -245,7 +245,7 @@ extension InfiniteCarousel: UICollectionViewDelegateFlowLayout {
     }
     
     /// Sets the minimum spacing between items to 0. (Required for Paging Mode)
-    func collectionView(
+    public func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
