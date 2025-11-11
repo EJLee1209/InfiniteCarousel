@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "InfiniteCarousel"
-  spec.version      = "1.0.0"
+  spec.version      = "1.0.1"
   spec.summary      = "A custom UICollectionView-based view that provides bidirectional infinite scrolling functionality."
   spec.description  = <<-DESC
   A UI component for implementing an infinitely looping carousel using UICollectionView.
