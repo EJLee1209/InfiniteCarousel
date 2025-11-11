@@ -141,10 +141,26 @@ public final class InfiniteCarousel: UIView {
             scrollTo(index: 1)
             self.isInitScroll = true
         }
+        
+        // Subscribe to device orientation change notifications.
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleChangeDeviceOrientation),
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIDevice.orientationDidChangeNotification,
+            object: nil
+        )
     }
     
     //*******************************************************
@@ -380,5 +396,22 @@ extension InfiniteCarousel: UICollectionViewDelegateFlowLayout {
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
         return spacing
+    }
+}
+
+// MARK: - Notification
+extension InfiniteCarousel {
+    /// Handles the `UIDevice.orientationDidChangeNotification`.
+    ///
+    /// When the device orientation changes, this method invalidates the collection view layout
+    /// and resets the scroll state to ensure the carousel correctly re-centers and displays
+    /// items based on the new dimensions.
+    ///
+    /// - Parameter notification: The notification object containing orientation change details.
+    @objc private func handleChangeDeviceOrientation(_ notification: Notification) {
+        isInitScroll = false
+        
+        collectionView.collectionViewLayout.invalidateLayout()
+        setNeedsLayout()
     }
 }
