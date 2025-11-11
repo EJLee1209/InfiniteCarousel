@@ -1,7 +1,7 @@
 # ♾️ EJInfiniteCarousel
 
 <div style="text-align: center;">
-    <img src="https://github.com/user-attachments/assets/4f786d04-c39e-476b-947d-d98c16131a09" alt="infiniteCarousel" style="max-width: 500px; height: auto; display: block; margin: 0 auto;">
+    <img src="https://github.com/user-attachments/assets/4f786d04-c39e-476b-947d-d98c16131a09" alt="infiniteCarousel" style="max-width: 240px; height: auto; display: block; margin: 0 auto;">
 </div>
 
 A highly customizable UICollectionView-based view for seamless, bidirectional infinite scrolling on iOS.
