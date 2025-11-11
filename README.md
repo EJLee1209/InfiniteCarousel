@@ -1,4 +1,5 @@
 # ♾️ EJInfiniteCarousel
+![infiniteCarousel](https://github.com/user-attachments/assets/4f786d04-c39e-476b-947d-d98c16131a09)
 
 A highly customizable UICollectionView-based view for seamless, bidirectional infinite scrolling on iOS.
 
