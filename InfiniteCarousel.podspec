@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 
-  spec.name         = "InfiniteCarousel"
+  spec.name         = "EJInfiniteCarousel"
   spec.version      = "1.0.1"
   spec.summary      = "A custom UICollectionView-based view that provides bidirectional infinite scrolling functionality."
   spec.description  = <<-DESC
