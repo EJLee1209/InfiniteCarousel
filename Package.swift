@@ -4,19 +4,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "InfiniteCarousel",
+    name: "EJInfiniteCarousel",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "InfiniteCarousel",
-            targets: ["InfiniteCarousel"]
+            name: "EJInfiniteCarousel",
+            targets: ["EJInfiniteCarousel"]
         ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module os a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "InfiniteCarousel"
+            name: "EJInfiniteCarousel"
         )
     ]
 )

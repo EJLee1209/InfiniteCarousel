@@ -28,7 +28,7 @@ final class ViewController: UIViewController {
         return control
     }()
     
-    private let numbers = (1...10).map { $0 }
+    private let numbers = (1...3).map { $0 }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,13 +11,15 @@ import UIKit
 final class CarouselItemView: UICollectionViewCell {
     let numberLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .bold)
-        label.textColor = .white
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .black
         label.textAlignment = .center
-        label.backgroundColor = .black
+        label.backgroundColor = .systemGroupedBackground
         label.clipsToBounds = true
         label.layer.cornerRadius = 16
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.borderColor = UIColor.systemBlue.cgColor
+        label.layer.borderWidth = 2
         return label
     }()
     
